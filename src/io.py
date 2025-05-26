@@ -4,7 +4,7 @@ from tqdm import tqdm
 
 def fetch_earnings_calendar(ticker):
     t = yf.Ticker(ticker)
-    cal = t.get_earnings_dates(limit=40)
+    cal = t.get_earnings_dates(limit=40) #current limit set to 40, can change later
     cal = cal.reset_index().rename(columns={"index": "date"})
     cal["date"] = pd.to_datetime(cal["date"].dt.date)
     return cal[["date", "epsactual", "epsestimate", "surprise"]]
