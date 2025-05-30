@@ -12,5 +12,3 @@ def fetch_earnings_calendar(ticker):
 def fetch_price_series(ticker, start, end):
     df = yf.download(ticker, start=start, end=end, auto_adjust=False)["Adj Close"]
     return df
-
-print("working")
