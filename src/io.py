@@ -6,6 +6,10 @@ def fetch_earnings_calendar(ticker):
     t = yf.Ticker(ticker)
     cal = t.get_earnings_dates(limit=40) #current limit set to 40, can change later
     cal = cal.reset_index().rename(columns={"index": "date"})
+
+    print(f"Columns after reset_index for {ticker}: {cal.columns}")
+    cal = cal.rename(columns={cal.columns[0]: "date"}) 
+    
     cal["date"] = pd.to_datetime(cal["date"].dt.date)
     return cal[["date", "epsactual", "epsestimate", "surprise"]]
 
